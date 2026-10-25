@@ -1,0 +1,4 @@
+D  h1->logits detach/forecast_KL MSP_F vs best baseline: -0.010  shifts>0: 3/11
+D  h1->logits detach/forecast_KL ALL vs best baseline: -0.020  shifts>0: 2/11
+B  h2->h1 detach/forecast MSP_F vs best baseline: -0.070  shifts>0: 0/11
+B  h2->h1 detach/forecast ALL vs best baseline: -0.106  shifts>0: 0/11

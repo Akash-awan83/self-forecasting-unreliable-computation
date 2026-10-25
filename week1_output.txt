@@ -1,0 +1,58 @@
+seed 0 ...
+seed 1 ...
+seed 2 ...
+seed 3 ...
+seed 4 ...
+
+=== Accuracy (self-model net / plain net / ensemble) ===
+  angle   0: self 0.973±0.003 | plain 0.975 | ens 0.981
+  angle  15: self 0.634±0.011 | plain 0.641 | ens 0.669
+  angle  30: self 0.363±0.016 | plain 0.334 | ens 0.377
+  angle  45: self 0.131±0.010 | plain 0.123 | ens 0.129
+  angle  60: self 0.121±0.008 | plain 0.118 | ens 0.121
+  angle  90: self 0.102±0.003 | plain 0.100 | ens 0.100
+
+=== Forecast-error ratio (mean shifted / mean clean) ===
+  angle  15: 3.81x ± 0.48
+  angle  30: 10.77x ± 3.19
+  angle  45: 30.10x ± 14.59
+  angle  60: 52.82x ± 26.79
+  angle  90: 313.38x ± 228.44
+
+=== A. OOD detection AUROC (clean vs rotated) — NOVELTY ===
+  method                          15          30          45          60          90
+  forecast_err (ours)     0.891±0.04  0.959±0.02  0.991±0.00  0.998±0.00  1.000±0.00
+  1-MSP (same net)        0.839±0.02  0.878±0.01  0.639±0.05  0.549±0.05  0.248±0.13
+  entropy (same net)      0.840±0.02  0.879±0.01  0.639±0.05  0.549±0.05  0.248±0.13
+  energy (same net)       0.738±0.01  0.771±0.02  0.407±0.07  0.309±0.10  0.057±0.06
+  1-MSP (plain net)       0.859±0.02  0.882±0.02  0.678±0.08  0.564±0.09  0.241±0.11
+  ensemble entropy        0.879±0.01  0.919±0.01  0.732±0.04  0.693±0.05  0.394±0.11
+  MC dropout entropy      0.864±0.01  0.918±0.01  0.742±0.04  0.667±0.06  0.341±0.05
+  AE recon err            0.782±0.06  0.930±0.02  0.995±0.00  0.998±0.00  1.000±0.00
+  Mahalanobis             0.929±0.01  0.973±0.01  0.991±0.00  0.997±0.00  1.000±0.00
+
+=== B. Error detection AUROC, WITHIN each angle (wrong vs correct) — ERRORS ===
+  method                          15          30          45          60          90
+  forecast_err (ours)     0.611±0.05  0.624±0.03  0.723±0.06  0.847±0.02  0.739±0.05
+  1-MSP (same net)        0.776±0.02  0.684±0.04  0.649±0.06  0.625±0.03  0.546±0.12
+  entropy (same net)      0.780±0.02  0.688±0.03  0.650±0.06  0.625±0.03  0.546±0.12
+  energy (same net)       0.698±0.03  0.666±0.03  0.673±0.07  0.688±0.03  0.628±0.10
+  1-MSP (plain net)       0.743±0.03  0.617±0.06  0.639±0.08  0.584±0.09  0.459±0.10
+  ensemble entropy        0.806±0.03  0.712±0.06  0.657±0.07  0.641±0.05  0.492±0.08
+  MC dropout entropy      0.797±0.02  0.715±0.04  0.647±0.06  0.624±0.07  0.566±0.07
+  AE recon err            0.702±0.03  0.703±0.04  0.848±0.04  0.912±0.02  0.938±0.02
+  Mahalanobis             0.688±0.05  0.651±0.02  0.720±0.03  0.810±0.04  0.714±0.06
+
+=== C. Selective prediction on POOLED clean + all angles (self-model net's predictions) ===
+  method                   AURC (lower better)     err-AUROC
+  forecast_err (ours)           0.3273±0.0096     0.869±0.01
+  1-MSP (same net)              0.6301±0.0360     0.531±0.03
+  entropy (same net)            0.6301±0.0360     0.532±0.03
+  energy (same net)             0.6939±0.0393     0.426±0.05
+  1-MSP (plain net)             0.6342±0.0434     0.513±0.06
+  ensemble entropy              0.5754±0.0342     0.585±0.04
+  MC dropout entropy            0.5951±0.0243     0.586±0.04
+  AE recon err                  0.3128±0.0034     0.892±0.00
+  Mahalanobis                   0.3130±0.0063     0.878±0.00
+  [oracle]                      0.2454
+  [random]                      0.6127

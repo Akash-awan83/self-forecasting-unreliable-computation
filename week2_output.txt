@@ -1,0 +1,35 @@
+seed 0 ...
+seed 1 ...
+seed 2 ...
+seed 3 ...
+seed 4 ...
+
+=== Clean accuracy per variant (mean over seeds) ===
+  A  h2->h1 nodetach lam1     0.973
+  A' h2->h1 nodetach lam.1    0.973
+  B  h2->h1 detach            0.975
+  C  h1->h2 detach            0.969
+  D  h1->logits detach        0.965
+
+=== Accuracy under each shift (variant A) — mild regime check ===
+      rot5     rot10     rot15     rot20     rot30  noise0.1  noise0.2  noise0.3   blur0.5   blur0.8   blur1.0
+     0.900     0.800     0.634     0.612     0.363     0.954     0.884     0.751     0.964     0.862     0.710
+
+=== Within-shift error-AUROC, averaged over all 11 mild shifts x 5 seeds ===
+  variant / score                           F alone    MSP     AE  MSP+AE   MSP+F    ALL            GAIN  shifts GAIN>0
+  A  h2->h1 nodetach lam1 / forecast          0.560  0.841  0.605   0.799   0.780  0.743    -0.056±0.011       0/11
+  A' h2->h1 nodetach lam.1 / forecast         0.566  0.837  0.600   0.793   0.781  0.741    -0.052±0.010       0/11
+  B  h2->h1 detach / forecast                 0.573  0.841  0.610   0.801   0.785  0.749    -0.052±0.013       0/11
+  C  h1->h2 detach / forecast                 0.554  0.813  0.608   0.781   0.757  0.739    -0.042±0.012       0/11
+  D  h1->logits detach / forecast             0.504  0.837  0.593   0.785   0.747  0.736    -0.050±0.012       0/11
+  D  h1->logits detach / forecast_KL          0.814  0.837  0.593   0.785   0.834  0.824    +0.039±0.008      10/11
+
+=== Forecast-alone error-AUROC per shift (vs MSP of same net) ===
+  variant / score                              rot5    rot10    rot15    rot20    rot30 noise0.1 noise0.2 noise0.3  blur0.5  blur0.8  blur1.0
+  A  h2->h1 nodetach lam1 / forecast          0.503    0.574    0.611    0.615    0.624    0.561    0.541    0.525    0.566    0.489    0.550
+  A' h2->h1 nodetach lam.1 / forecast         0.507    0.562    0.593    0.598    0.622    0.620    0.547    0.525    0.648    0.485    0.524
+  B  h2->h1 detach / forecast                 0.542    0.572    0.598    0.616    0.606    0.569    0.542    0.532    0.655    0.502    0.566
+  C  h1->h2 detach / forecast                 0.540    0.564    0.569    0.564    0.559    0.604    0.526    0.520    0.648    0.483    0.512
+  D  h1->logits detach / forecast             0.477    0.497    0.490    0.529    0.490    0.497    0.507    0.528    0.534    0.502    0.494
+  D  h1->logits detach / forecast_KL          0.890    0.827    0.776    0.768    0.678    0.910    0.869    0.796    0.912    0.800    0.728
+  [MSP, net A]                                0.913    0.844    0.776    0.767    0.684    0.936    0.884    0.807    0.939    0.887    0.814
